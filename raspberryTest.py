@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 # coding:utf-8
+
 import tkinter as tk
 import time
 import RPi.GPIO as GPIO
@@ -8,13 +9,21 @@ import datetime
 import requests
 import threading
 import os
+import logging
 
 mydb2 = pymssql.connect(host='192.168.0.43',
                        user='sa',
                        password='test123',
                        database='Raspberry_pi',)
                        #charset='utf8')
-
+logging.basicConfig(
+                    filename='testt.txt',  filemode='a',##模式，有w和a，w就是写模式，每次都会重新写日志，覆盖之前的日志
+                    #a是追加模式，默认如果不写的话，就是追加模式
+                    format=
+                    '%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'
+                    #日志格式
+                    )
+                    
 window = tk.Tk()
 window.title('my window')
 window.geometry('2000x3000')
@@ -97,7 +106,7 @@ def sensor():
    distance = elapsed * 34000
 # That was the distance there and back so halve the value
    distance = distance / 2/100
-    
+   logging.warning('sensor')
 
 def returnCycle():
     
@@ -119,7 +128,7 @@ def returnCycle():
     
 
 def InsertSQL():
-    
+      
     added_thread = threading.Thread(target=Distance)
     added_thread.start()
     
@@ -130,11 +139,12 @@ def InsertSQL():
     var2=e3.get()
     var3=e4.get()
     var4=e5.get()
-    #value = lb.get(lb.curselection())   #請選取當前的製程!
+    #value = lb.get(lb.curselection())  
     #Var.set(value) 
     #int(var4)
     Var.set('start')
     startTime()
+    logging.warning('InsertSQL')
     #mycursor = mydb2.cursor()
     #sql = "INSERT INTO distance (wo_id,op,count,lm_time,lm_user,eqp_status,ma_id,start_time) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
     #val = (var,var3,var4,a,var2,value,var5,startTime)
@@ -249,6 +259,7 @@ def Distance():
        mycursor3.execute(sql6,val6)
        print(cycle1)
        startTime=endTime
+       logging.warning('insert')
        time.sleep(20)
    
   # if g==1:
@@ -310,7 +321,7 @@ def Distance():
   mycursor9.execute(sql9,val9)
 
   mydb2.commit()
-
+  logging.warning('distanceTest')
 def main(): 
  
  global e1,e2,e3,e4,e5,Var,var,var2,var3,a,var4,Var2,lb,value
