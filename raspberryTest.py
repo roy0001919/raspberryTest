@@ -315,13 +315,13 @@ def Distance():
       #val5 = (var,var2,var3,var,var2,var3)
       #mycursor9.execute(sql5,val5)
       #mydb2.commit()    
-  sql9 = "INSERT INTO distanceTest (distanceM,count,time1,date1,xaxis) VALUES (%s,%s,%s,%s,%s)"
-  val9 = (distance,"1",z,y,a)
+  #sql9 = "INSERT INTO distanceTest (distanceM,count,time1,date1,xaxis) VALUES (%s,%s,%s,%s,%s)"
+  #val9 = (distance,"1",z,y,a)
 
-  mycursor9.execute(sql9,val9)
+  #mycursor9.execute(sql9,val9)
 
-  mydb2.commit()
-  logging.warning('distanceTest')
+  #mydb2.commit()
+  #logging.warning('distanceTest')
 def main(): 
  
  global e1,e2,e3,e4,e5,Var,var,var2,var3,a,var4,Var2,lb,value
